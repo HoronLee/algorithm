@@ -16,8 +16,9 @@ type MyLinkedList struct {
 
 // 构造新的链表
 func Constructor() MyLinkedList {
+	node := &Node{-999, nil}
 	return MyLinkedList{
-		dummyHead: &Node{-999, nil}, // 新的虚拟头节点
+		dummyHead: node,
 		Size:      0,
 	}
 }
@@ -53,9 +54,33 @@ func (this *MyLinkedList) AddAtTail(val int) {
 }
 
 func (this *MyLinkedList) AddAtIndex(index int, val int) {
+	if index < 0 {
+		index = 0
+	} else if index > this.Size {
+		return
+	}
+	node := &Node{Val: val}
+	cur := this.dummyHead
+	for range index {
+		cur = cur.Next
+	}
+	node.Next = cur.Next
+	cur.Next = node
+	this.Size++
 }
 
 func (this *MyLinkedList) DeleteAtIndex(index int) {
+	if index < 0 || index >= this.Size {
+		return
+	}
+	cur := this.dummyHead
+	for range index {
+		cur = cur.Next
+	}
+	if cur.Next != nil {
+		cur.Next = cur.Next.Next
+	}
+	this.Size--
 }
 
 func main() {
