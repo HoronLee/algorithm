@@ -14,7 +14,7 @@ func swapPairs(head *ListNode) *ListNode {
 		head.Next.Next = head  // 2->1
 		head.Next = next       // 1->3
 		pre = head             // 第一次循环依赖dummy节点，第二次之后只需要指向节点对的第二个节点即可
-		head = next            // 第二次循环之后头需要移动到下一个节点对的第一个节点
+		head = next            // 下一次循环之后头需要移动到下一个节点对的第一个节点
 	}
 	return dummy.Next
 }
